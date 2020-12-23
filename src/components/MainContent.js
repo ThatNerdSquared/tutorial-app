@@ -2,7 +2,7 @@ import React from "react"
 
 function MainContent() {
 	return (
-		<div>
+		<div className="main">
 			<p>What is this? Well, it's some cool stuff. I'm currently learning React, so in the future I'll use these skills for:</p>
 			<ul>
 				<li>A pom app</li>

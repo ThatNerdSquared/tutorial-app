@@ -1,12 +1,19 @@
 import React from "react"
+import TodoItem from "./TodoItem"
 
 function App() {
+	const uncheckedStyle = {
+		fontFamily: "Avenir, Helvetica, sans-serif",
+		display: "flex",
+		textAlign: "center",
+		justifyContent: "center",
+	}
 	return (
-		<div>
-			<h1>Todo List</h1>
-			<p><input type="checkbox" /> Be nerdy</p>
-			<p><input type="checkbox" /> Conquer world</p>
-			<p><input type="checkbox" /> Learn more cool stuff</p>
+		<div className="todolist">
+			<h1 className="todo-header">To-do List</h1>
+			<TodoItem name="Be nerdy"/>
+			<TodoItem name="Conquer world"/>
+			<TodoItem name="Learn more cool stuff"/>
 		</div>
 	)
 }
