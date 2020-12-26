@@ -2,17 +2,17 @@ const todos = [
 	
 		{
 			id: "1",
-			title: "ck_mark: Welcome messages",
+			title: "Welcome messages",
 			list: "Complete"
 		},
 		{
 			id: "2",
-			title: "ck_mark: Morning/night reacts",
+			title: "Morning/night reacts",
 			list: "Complete"
 		},
 		{
 			id: "3",
-			title: "ck_mark: Focused Raider mode",
+			title: "Focused Raider mode",
 			list: "Complete"
 		},
 		{
