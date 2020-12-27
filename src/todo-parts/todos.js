@@ -17,31 +17,41 @@ const todos = [
 		},
 		{
 			id: "4",
-			title: " FAQ command",
+			title: "FAQ command",
 			list: "In progress"
 		},
 		{
 			id: "5",
-			title: "Accountability pins",
-			list: "In progress"
+			title: "Weird !raid glitch",
+			list: "In progress",
 		},
 		{
 			id: "6",
-			title: "Highlights",
+			title: "Accountability pins",
 			list: "To-do"
 		},
 		{
 			id: "7",
-			title: "!article command",
+			title: "Admin embed command",
 			list: "To-do"
 		},
 		{
 			id: "8",
-			title: "!podcast command",
+			title: "Highlights",
 			list: "To-do"
 		},
 		{
 			id: "9",
+			title: "!article command",
+			list: "To-do"
+		},
+		{
+			id: "10",
+			title: "!podcast command",
+			list: "To-do"
+		},
+		{
+			id: "11",
 			title: "AFK mode",
 			list: "To-do"
 		}
