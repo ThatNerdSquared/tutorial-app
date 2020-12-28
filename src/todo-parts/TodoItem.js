@@ -2,6 +2,14 @@ import React from "react"
 
 function TodoItem(props) {
 	let checked
+	let checkedStyle = {
+		color: "grey",
+		fontStyle: "italic",
+		textDecoration: "line-through"
+	}
+	let nonCheckedStyle = {
+		color: props.list==="To-do" ? "red" : props.list==="In progress" ? "#00c3ff" : null
+	}
 	if (props.list === "Complete") {
 		checked = true
 	}
@@ -15,8 +23,8 @@ function TodoItem(props) {
 				checked={checked}
 				onChange={() => props.handleChange(props.id)}
 			/>
-			<p>{props.title + ": "}</p>
-			<p style={{color: props.list==="To-do" ? "red" : props.list==="In progress" ? "#00c3ff" : "black"}}>{props.list}</p>
+			<p style={checked ? checkedStyle : null}>{props.title + ": "}</p>
+			<p style={checked ? checkedStyle : nonCheckedStyle}>{props.list}</p>
 		</div>
 	)
 }
