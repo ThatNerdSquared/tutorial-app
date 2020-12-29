@@ -42,6 +42,7 @@ class App extends React.Component {
 	}
 
 	handleSubmit(event) {
+		event.preventDefault()
 		let todosLength = this.state.todos.length
 		let intLength = parseInt(todosLength)
 		let newID = intLength++
