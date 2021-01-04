@@ -55,7 +55,6 @@ class App extends React.Component {
 		}
 		this.setState(prevState => {
 			let newTodos = prevState.todos.push(finalTask)
-			console.log(newTodos)
 			return {
 				isLoading: false,
 				todos: newTodos
@@ -64,8 +63,10 @@ class App extends React.Component {
 	}
 
 	formChange(event) {
-		const {name, value} = event
+		const name = event.target.name
+		const value = event.target.value
 		this.setState({ [name]: value })
+		console.log(this.state)
 	}
 
 	componentDidMount() {

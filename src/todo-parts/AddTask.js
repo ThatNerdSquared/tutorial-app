@@ -3,7 +3,7 @@ import React from "react"
 function AddTask(props) {
 	return (
 		<div>
-			<form>
+			<form onSubmit={props.handleSubmit}>
 				<input
 					type="text"
 					value={props.newTask}
