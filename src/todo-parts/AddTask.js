@@ -16,6 +16,7 @@ function AddTask(props) {
 					onChange={props.formChange}
 					name="newList"
 				>
+					<option value="Please select">Please Select</option>
 					<option value="Complete">Complete</option>
 					<option value="In progress">In progress</option>
 					<option value="To-do">To-do</option>

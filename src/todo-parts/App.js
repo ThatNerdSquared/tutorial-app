@@ -8,14 +8,16 @@ class App extends React.Component {
 		super()
 		this.state = {
 			isLoading: true,
-			todos: todosData
+			todos: todosData,
+			newTask : "",
+			newList: ""
 		}
-		this.handleChange = this.handleChange.bind(this)
+		this.handleCheck= this.handleCheck.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.formChange = this.formChange.bind(this)
 	}
 
-	handleChange(id) {
+	handleCheck(id) {
 		this.setState(prevState => {
 			const newState = prevState.todos.map(todo => {
 				if (todo.id === id) {
@@ -43,21 +45,26 @@ class App extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault()
-		let todosLength = this.state.todos.length
-		let intLength = parseInt(todosLength)
-		let newID = intLength++
+		let todosLength = this.state.todos
+		let g;
+		g = todosLength.length
+		let incID = g+1
+		let newID = incID.toString()
 		let newName = this.state.newTask
 		let setList = this.state.newList
-		let finalTask = {
-			id: newID,
-			title: newName,
-			list: setList
-		}
 		this.setState(prevState => {
-			let newTodos = prevState.todos.push(finalTask)
+			let todos = []
+			prevState.todos.forEach(item => todos.push(item))
+			todos.push({
+				id: newID,
+				title: newName,
+				list: setList
+			})
 			return {
 				isLoading: false,
-				todos: newTodos
+				newTask: "",
+				newList: "",
+				todos: todos
 			}
 		})
 	}
@@ -66,7 +73,6 @@ class App extends React.Component {
 		const name = event.target.name
 		const value = event.target.value
 		this.setState({ [name]: value })
-		console.log(this.state)
 	}
 
 	componentDidMount() {
@@ -90,7 +96,14 @@ class App extends React.Component {
 			)
 		}
 		else {
-			const components = this.state.todos.map(todo => <TodoItem key={todo.id} id={todo.id} title={todo.title} list={todo.list} handleChange={this.handleChange}/>)
+			console.log(this.state)
+			const components = this.state.todos.map(todo => <TodoItem
+				key={todo.id}
+				id={todo.id}
+				title={todo.title}
+				list={todo.list}
+				handleChange={this.handleCheck}
+			/>)
 			return (
 				<div className="todolist">
 					<h1 className="todo-header">To-do List</h1>
