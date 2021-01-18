@@ -27,6 +27,6 @@ module.exports = {
 		})
 	},
 	down: (queryInterface, Sequelize) => {
-		return queryInterface.dropTable("lead");
+		return queryInterface.dropTable("todos");
 	}
 }

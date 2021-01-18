@@ -1,6 +1,6 @@
 import React from "react"
 import TodoItem from "./TodoItem"
-import todosData from "./todos.js"
+// import todosData from "./todos.js"
 import LoadScreen from "./LoadScreen"
 import AddTask from "./AddTask"
 class App extends React.Component {
@@ -8,13 +8,14 @@ class App extends React.Component {
 		super()
 		this.state = {
 			isLoading: true,
-			todos: todosData,
+			todos: [],
 			newTask : "",
 			newList: ""
 		}
 		this.handleCheck= this.handleCheck.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.formChange = this.formChange.bind(this)
+		this.callAPI = this.callAPI.bind(this)
 	}
 
 	handleCheck(id) {
@@ -52,21 +53,33 @@ class App extends React.Component {
 		let newID = incID.toString()
 		let newName = this.state.newTask
 		let setList = this.state.newList
-		this.setState(prevState => {
-			let todos = []
-			prevState.todos.forEach(item => todos.push(item))
-			todos.push({
-				id: newID,
-				title: newName,
-				list: setList
-			})
-			return {
-				isLoading: false,
-				newTask: "",
-				newList: "",
-				todos: todos
-			}
+		let data = {
+			title: newName,
+			list: setList
+		}
+		fetch("http://localhost:9000/api", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data),
 		})
+		this.callAPI()
+		// this.setState(prevState => {
+		// 	let todos = []
+		// 	prevState.todos.forEach(item => todos.push(item))
+		// 	todos.push({
+		// 		id: newID,
+		// 		title: newName,
+		// 		list: setList
+		// 	})
+		// 	return {
+		// 		isLoading: false,
+		// 		newTask: "",
+		// 		newList: "",
+		// 		todos: todos
+		// 	}
+		// })
 	}
 
 	formChange(event) {
@@ -75,16 +88,37 @@ class App extends React.Component {
 		this.setState({ [name]: value })
 	}
 
+	callAPI() {
+		fetch("http://localhost:9000/api")
+			.then(res => console.log(JSON.parse(res.body)))
+			// .then(res => this.setState(res => {
+			// 	let todoData
+			// 	res === undefined ? todoData = [] : todoData = res
+			// 	console.log(res === undefined)
+			// 	console.log(todoData)
+			// 	return {
+			// 		isLoading: false,
+			// 		todos: todoData
+			// 	}
+			// }))
+
+			.then(res => this.setState({
+				isLoading: false,
+				todos: res,
+			}))
+	}
+
 	componentDidMount() {
-		setTimeout(() => {
-			this.setState(prevState => {
-				let todos = prevState.todos
-				return {
-					isLoading: false,
-					todos: todos
-				}
-			})
-		}, 1500)
+		this.callAPI()
+		// setTimeout(() => {
+		// 	this.setState(prevState => {
+		// 		let todos = prevState.todos
+		// 		return {
+		// 			isLoading: false,
+		// 			todos: todos
+		// 		}
+		// 	})
+		// }, 1500)
 	}
 	
 	render() {
