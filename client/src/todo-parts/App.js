@@ -90,7 +90,7 @@ class App extends React.Component {
 
 	callAPI() {
 		fetch("http://localhost:9000/api")
-			.then(res => console.log(JSON.parse(res.body)))
+			.then(res => console.log(JSON.parse(res)))
 			// .then(res => this.setState(res => {
 			// 	let todoData
 			// 	res === undefined ? todoData = [] : todoData = res
