@@ -44,29 +44,25 @@ class App extends React.Component {
 		})
 	}
 
-	handleSubmit(event) {
+	async handleSubmit(event) {
 		event.preventDefault()
-		let todosLength = this.state.todos
-		let g;
-		g = todosLength.length
-		let incID = g+1
-		let newID = incID.toString()
 		let newName = this.state.newTask
 		let setList = this.state.newList
 		let data = {
 			title: newName,
 			list: setList
 		}
+		console.log("handleSubmit-data")
 		console.log(data)
-		fetch("http://localhost:9000/api", {
+		let res = await fetch("http://localhost:9000/api", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
 			body: JSON.stringify(data),
 		})
-		// .then(this.callAPI())
-		.then(res => console.log(res))
+		console.log(res)
+		this.callAPI()
 		return
 		// this.setState(prevState => {
 		// 	let todos = []
@@ -96,6 +92,7 @@ class App extends React.Component {
 			.then(response => response.json())
 			.then(response => {
 				const data = response.data
+				console.log("callAPI-data")
 				console.log(data)
 				this.setState({
 					isLoading: false,
@@ -108,15 +105,6 @@ class App extends React.Component {
 
 	componentDidMount() {
 		this.callAPI()
-		// setTimeout(() => {
-		// 	this.setState(prevState => {
-		// 		let todos = prevState.todos
-		// 		return {
-		// 			isLoading: false,
-		// 			todos: todos
-		// 		}
-		// 	})
-		// }, 1500)
 	}
 	
 	render() {
@@ -128,6 +116,7 @@ class App extends React.Component {
 			)
 		}
 		else {
+			console.log("render-State")
 			console.log(this.state)
 			const components = this.state.todos.map(todo => <TodoItem
 				key={todo.id}
