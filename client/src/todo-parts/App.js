@@ -18,8 +18,8 @@ class App extends React.Component {
 		this.callAPI = this.callAPI.bind(this)
 	}
 
-	handleCheck(id) {
-		this.setState(prevState => {
+	async handleCheck(data) {
+/* 		this.setState(prevState => {
 			const newState = prevState.todos.map(todo => {
 				if (todo.id === id) {
 					if (todo.list === "Complete") {
@@ -41,7 +41,18 @@ class App extends React.Component {
 				isLoading: false,
 				todos: newState
 			}
+		}) */
+		console.log("editTask")
+		console.log(data)
+		let res = await fetch("http://localhost:9000/api/edit", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data),
 		})
+		console.log(res)
+		this.callAPI()
 	}
 
 	async handleSubmit(event) {

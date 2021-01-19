@@ -21,13 +21,13 @@ exports.edit_task = function(req, res, next) {
 	data.id
 	data.list
 
-	return models.lead.update({
+	return models.todo.update({
 		list: data.list
 	}, {
 		where: {
 			id : data.id
 		}
-	}).then(result => {
+	}).then(todo => {
 		console.log(todo)
 		res.send("done")
 	})
