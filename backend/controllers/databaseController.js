@@ -10,12 +10,8 @@ exports.add_task = function(req, res, next) {
 	})
 }
 exports.get_tasks = function(req, res, next) {
+	res.set("Access-Control-Allow-Origin", "*") 
 	return models.todo.findAll().then(todos => {
-		let variableName = '';
-		for(i = 0; i < todos.length; i++) {
-			variableName += todos[i] + ',';
-		}
-		return res.send(variableName);
-		// res.send(todos)
+		res.send(JSON.stringify({ data: todos }))
 	})
 }

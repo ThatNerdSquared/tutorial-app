@@ -57,6 +57,7 @@ class App extends React.Component {
 			title: newName,
 			list: setList
 		}
+		console.log(data)
 		fetch("http://localhost:9000/api", {
 			method: "POST",
 			headers: {
@@ -64,7 +65,9 @@ class App extends React.Component {
 			},
 			body: JSON.stringify(data),
 		})
-		this.callAPI()
+		// .then(this.callAPI())
+		.then(res => console.log(res))
+		return
 		// this.setState(prevState => {
 		// 	let todos = []
 		// 	prevState.todos.forEach(item => todos.push(item))
@@ -90,22 +93,17 @@ class App extends React.Component {
 
 	callAPI() {
 		fetch("http://localhost:9000/api")
-			.then(res => console.log(JSON.parse(res)))
-			// .then(res => this.setState(res => {
-			// 	let todoData
-			// 	res === undefined ? todoData = [] : todoData = res
-			// 	console.log(res === undefined)
-			// 	console.log(todoData)
-			// 	return {
-			// 		isLoading: false,
-			// 		todos: todoData
-			// 	}
-			// }))
-
-			.then(res => this.setState({
-				isLoading: false,
-				todos: res,
-			}))
+			.then(response => response.json())
+			.then(response => {
+				const data = response.data
+				console.log(data)
+				this.setState({
+					isLoading: false,
+					todos: data,
+					newTask : "",
+					newList: ""
+				})
+			})
 	}
 
 	componentDidMount() {
