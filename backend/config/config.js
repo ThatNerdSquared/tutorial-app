@@ -3,7 +3,7 @@ module.exports = {
     "username": "todos-dbuser",
     "password": "database-login-todoist-diy",
     "database": "todos-db",
-    "host": "http://localhost:9000",
+    "host": "127.0.0.1",
 	"dialect": "postgres",
 	"port": "5432",
   },
