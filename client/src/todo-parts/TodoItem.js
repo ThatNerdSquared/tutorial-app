@@ -23,16 +23,19 @@ function TodoItem(props) {
 				checked={checked}
 				onChange={() => props.handleChange(props.id)}
 			/> */}
-			<select
-				value={props.list}
-				onChange={() => props.handleChange({ id: props.id, list: value })}
-			>
-				<option value="Complete">Complete</option>
-				<option value="In progress">In progress</option>
-				<option value="To-do">To-do</option>
-			</select>
-			<p style={checked ? checkedStyle : null}>{props.title + ": "}</p>
-			<p style={checked ? checkedStyle : nonCheckedStyle}>{props.list}</p>
+			<form>
+				<select
+					id={props.id}
+					value={props.list}
+					onChange={props.handleChange()}
+				>
+					<option value="Complete">Complete</option>
+					<option value="In progress">In progress</option>
+					<option value="To-do">To-do</option>
+				</select>
+				<p style={checked ? checkedStyle : null}>{props.title + ": "}</p>
+				<p style={checked ? checkedStyle : nonCheckedStyle}>{props.list}</p>
+			</form>
 		</div>
 	)
 }

@@ -18,7 +18,7 @@ class App extends React.Component {
 		this.callAPI = this.callAPI.bind(this)
 	}
 
-	async handleCheck(data) {
+	async handleCheck(event) {
 /* 		this.setState(prevState => {
 			const newState = prevState.todos.map(todo => {
 				if (todo.id === id) {
@@ -42,6 +42,12 @@ class App extends React.Component {
 				todos: newState
 			}
 		}) */
+		const id = event.target.id
+		const list = event.target.value
+		let data = {
+			id: id,
+			list: list
+		}
 		console.log("editTask")
 		console.log(data)
 		let res = await fetch("http://localhost:9000/api/edit", {
