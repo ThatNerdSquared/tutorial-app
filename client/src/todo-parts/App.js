@@ -13,35 +13,13 @@ class App extends React.Component {
 			newList: ""
 		}
 		this.handleCheck= this.handleCheck.bind(this)
+		this.deleteMe = this.deleteMe.bind(this)
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.formChange = this.formChange.bind(this)
 		this.callAPI = this.callAPI.bind(this)
 	}
 
 	async handleCheck(event) {
-/* 		this.setState(prevState => {
-			const newState = prevState.todos.map(todo => {
-				if (todo.id === id) {
-					if (todo.list === "Complete") {
-						return {
-							...todo,
-							list: "In progress"
-						}
-					}
-					else {
-						return {
-							...todo,
-							list: "Complete"
-						}
-					}
-				}
-				return todo
-			})
-			return {
-				isLoading: false,
-				todos: newState
-			}
-		}) */
 		const id = event.target.id
 		const list = event.target.value
 		let data = {
@@ -50,7 +28,26 @@ class App extends React.Component {
 		}
 		console.log("editTask")
 		console.log(data)
-		let res = await fetch("http://localhost:9000/api/edit", {
+		// let res = await fetch("http://localhost:9000/api/edit", {
+		let res = await fetch("http://192.168.228.111:9000/api/edit", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data),
+		})
+		console.log(res)
+		this.callAPI()
+	}
+
+	async deleteMe(event) {
+		event.preventDefault()
+		let id = event.target.id
+		let data = {
+			id: id
+		}
+		// let res = await fetch("http://localhost:9000/api/delete", {
+		let res = await fetch("http://192.168.228.111:9000/api/delete", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -71,7 +68,8 @@ class App extends React.Component {
 		}
 		console.log("handleSubmit-data")
 		console.log(data)
-		let res = await fetch("http://localhost:9000/api", {
+		// let res = await fetch("http://localhost:9000/api", {
+		let res = await fetch("http://192.168.228.111:9000/api", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -81,21 +79,6 @@ class App extends React.Component {
 		console.log(res)
 		this.callAPI()
 		return
-		// this.setState(prevState => {
-		// 	let todos = []
-		// 	prevState.todos.forEach(item => todos.push(item))
-		// 	todos.push({
-		// 		id: newID,
-		// 		title: newName,
-		// 		list: setList
-		// 	})
-		// 	return {
-		// 		isLoading: false,
-		// 		newTask: "",
-		// 		newList: "",
-		// 		todos: todos
-		// 	}
-		// })
 	}
 
 	formChange(event) {
@@ -105,7 +88,8 @@ class App extends React.Component {
 	}
 
 	callAPI() {
-		fetch("http://localhost:9000/api")
+		// fetch("http://localhost:9000/api")
+		fetch("http://192.168.228.111:9000/api")
 			.then(response => response.json())
 			.then(response => {
 				const data = response.data
@@ -141,6 +125,7 @@ class App extends React.Component {
 				title={todo.title}
 				list={todo.list}
 				handleChange={this.handleCheck}
+				deleteMe={this.deleteMe}
 			/>)
 			return (
 				<div className="todolist">

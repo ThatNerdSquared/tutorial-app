@@ -27,14 +27,20 @@ function TodoItem(props) {
 				<select
 					id={props.id}
 					value={props.list}
-					onChange={props.handleChange()}
+					onChange={props.handleChange}
 				>
 					<option value="Complete">Complete</option>
 					<option value="In progress">In progress</option>
 					<option value="To-do">To-do</option>
 				</select>
+			</form>
 				<p style={checked ? checkedStyle : null}>{props.title + ": "}</p>
 				<p style={checked ? checkedStyle : nonCheckedStyle}>{props.list}</p>
+			<form
+				id={props.id}
+				onSubmit={props.deleteMe}
+			>
+				<button>Delete</button>
 			</form>
 		</div>
 	)
